@@ -1,45 +1,8 @@
 title: yvngdrac Writeups
-description: Security research and technical writeups
-theme: jekyll-theme-chirpy
+description: Security research and CTF writeups
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
-  - jekyll-paginate
-  - jekyll-redirect-from
-  - jekyll-seo-tag
-  - jekyll-archives
 
-# Pagination
-paginate: 10
-paginate_path: /page:num/
-
-# Archives
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layouts:
-    category: category
-    tag: tag
-
-# Author
-author: yvngdrac
-social:
-  name: yvngdrac
-  links:
-    - https://github.com/yvngdrac
-    - https://twitter.com/yourhandle
-
-# Analytics
-google_analytics:
-  id: ''
-
-# Sidebar
-sidebar: true
-
-# Comment
-comments: true
-disqus:
-  comments: false
-
-# Dark mode
-prefer-dark-mode: true
+# Simple config
+markdown: kramdown
