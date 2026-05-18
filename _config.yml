@@ -1,12 +1,45 @@
-title: Writeups
-description: My security and technical writeups
-theme: jekyll-theme-minimal
+title: yvngdrac Writeups
+description: Security research and technical writeups
+theme: jekyll-theme-chirpy
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-archives
 
-# Customize as needed
+# Pagination
+paginate: 10
+paginate_path: /page:num/
+
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: category
+    tag: tag
+
+# Author
 author: yvngdrac
-email: your-email@example.com
+social:
+  name: yvngdrac
+  links:
+    - https://github.com/yvngdrac
+    - https://twitter.com/yourhandle
 
-# Build settings
-markdown: kramdown
+# Analytics
+google_analytics:
+  id: ''
+
+# Sidebar
+sidebar: true
+
+# Comment
+comments: true
+disqus:
+  comments: false
+
+# Dark mode
+prefer-dark-mode: true
