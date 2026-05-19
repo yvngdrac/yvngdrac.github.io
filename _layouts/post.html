@@ -1,0 +1,242 @@
+---
+layout: default
+---
+
+<article class="post-full">
+  <header class="post-header">
+    <div class="post-meta-top">
+      <span class="post-date">
+        <i class="far fa-calendar"></i> {{ page.date | date: "%B %d, %Y" }}
+      </span>
+      <span class="post-category">
+        <i class="fas fa-folder"></i> 
+        <a href="{{ '/categories/' | relative_url }}#{{ page.categories | first | slugify }}">{{ page.categories | first }}</a>
+      </span>
+      <span class="post-reading-time">
+        <i class="far fa-clock"></i> {{ content | number_of_words | divided_by: 200 | append: ' min read' }}
+      </span>
+    </div>
+    <h1 class="post-title-full">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="post-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      {% for tag in page.tags %}
+      <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag-pill">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="post-share">
+      <span>Share this:</span>
+      <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url | url_encode }}" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url_encode }}" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/yvngdrac" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    
+    <div class="post-navigation">
+      {% if page.previous.url %}
+      <a class="prev" href="{{ page.previous.url | relative_url }}">
+        <i class="fas fa-arrow-left"></i> Previous: {{ page.previous.title | truncate: 40 }}
+      </a>
+      {% endif %}
+      {% if page.next.url %}
+      <a class="next" href="{{ page.next.url | relative_url }}">
+        Next: {{ page.next.title | truncate: 40 }} <i class="fas fa-arrow-right"></i>
+      </a>
+      {% endif %}
+    </div>
+  </footer>
+</article>
+
+<style>
+  .post-full {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .post-meta-top {
+    display: flex;
+    gap: 1.2rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .post-title-full {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-head);
+    line-height: 1.3;
+    margin: 0.5rem 0;
+  }
+  
+  .post-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  
+  .post-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
+  .post-content {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  .post-content h1,
+  .post-content h2,
+  .post-content h3,
+  .post-content h4 {
+    font-family: var(--mono);
+    color: var(--text-head);
+    margin: 1.8rem 0 1rem;
+  }
+  
+  .post-content h2 {
+    font-size: 1.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .post-content h3 {
+    font-size: 1.25rem;
+  }
+  
+  .post-content p {
+    margin-bottom: 1.2rem;
+  }
+  
+  .post-content code {
+    background: var(--tag-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  
+  .post-content pre {
+    background: var(--bg-sidebar);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.2rem 0;
+  }
+  
+  .post-content pre code {
+    background: none;
+    padding: 0;
+  }
+  
+  .post-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.2rem 0;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  
+  .post-content ul, 
+  .post-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  .post-content li {
+    margin: 0.3rem 0;
+  }
+  
+  .post-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  
+  .post-share {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-share a {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  
+  .post-share a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .post-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .post-navigation a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.15s;
+  }
+  
+  .post-navigation a:hover {
+    color: var(--accent);
+  }
+  
+  @media (max-width: 720px) {
+    .post-title-full {
+      font-size: 1.5rem;
+    }
+    
+    .post-meta-top {
+      gap: 0.8rem;
+    }
+    
+    .post-navigation {
+      flex-direction: column;
+    }
+  }
+</style>
