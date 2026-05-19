@@ -12,6 +12,12 @@ permalink: /:categories/:year/:month/:day/:title/
 paginate: 10
 paginate_path: "/page/:num/"
 
+# Collections for tabs
+collections:
+  tabs:
+    output: true
+    permalink: /:path/
+
 # Plugins
 plugins:
   - jekyll-feed
@@ -37,5 +43,10 @@ defaults:
   - scope:
       path: ""
       type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "_tabs"
+      type: "tabs"
     values:
       layout: "default"
