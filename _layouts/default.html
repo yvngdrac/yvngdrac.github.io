@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if page.title %}{{ page.title }} - {% endif %}/home/yvngdrac</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Security research and CTF writeups{% endif %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+  {% feed_meta %}
+  {% seo %}
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar-placeholder">yd</div>
+      </div>
+      <div class="site-title">/home/yvngdrac</div>
+      <div class="site-sub">Let's break things, then fix them</div>
+    </div>
+
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item {% if page.url == '/' %}active{% endif %}">
+          <a href="{{ '/' | relative_url }}"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item {% if page.url contains '/categories/' %}active{% endif %}">
+          <a href="{{ '/categories/' | relative_url }}"><i class="fas fa-stream"></i> Categories</a>
+        </li>
+        <li class="nav-item {% if page.url contains '/tags/' %}active{% endif %}">
+          <a href="{{ '/tags/' | relative_url }}"><i class="fas fa-tags"></i> Tags</a>
+        </li>
+        <li class="nav-item {% if page.url contains '/archives/' %}active{% endif %}">
+          <a href="{{ '/archives/' | relative_url }}"><i class="fas fa-archive"></i> Archives</a>
+        </li>
+        <li class="nav-item {% if page.url contains '/about/' %}active{% endif %}">
+          <a href="{{ '/about/' | relative_url }}"><i class="fas fa-info-circle"></i> About</a>
+        </li>
+      </ul>
+    </nav>
+
+    <hr class="sidebar-divider" />
+
+    <div class="sidebar-socials">
+      <button class="theme-btn" id="themeToggle" title="Toggle theme">
+        <i class="fas fa-adjust"></i>
+      </button>
+      <a href="https://github.com/yvngdrac" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="{{ '/feed.xml' | relative_url }}">
+        <i class="fas fa-rss"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <nav class="breadcrumb">
+      <span>~</span> / 
+      {% if page.breadcrumb %}
+        {{ page.breadcrumb }}
+      {% else %}
+        {% assign crumbs = page.url | split: '/' %}
+        {% for crumb in crumbs %}
+          {% if crumb != '' %}
+            / <span>{{ crumb }}</span>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </nav>
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="search" placeholder="Search..." aria-label="Search posts" id="searchInput" />
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    {{ content }}
+  </main>
+
+  <!-- PANEL -->
+  <aside class="panel">
+    <section>
+      <h2 class="panel-heading">Recently Updated</h2>
+      <ul class="recent-list">
+        {% assign recent_posts = site.posts | limit: 5 %}
+        {% for post in recent_posts %}
+        <li><a href="{{ post.url | relative_url }}">{{ post.title | truncate: 40 }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="panel-heading">Trending Tags</h2>
+      <div class="tag-cloud">
+        {% assign tags = site.tags | sort %}
+        {% for tag in tags limit: 8 %}
+        <a class="tag-pill" href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}">{{ tag[0] }}</a>
+        {% endfor %}
+      </div>
+    </section>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© {{ 'now' | date: '%Y' }} <a href="https://github.com/yvngdrac">yvngdrac</a>. Some rights reserved.</span>
+    <span>Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></span>
+  </footer>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // Simple search
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('keyup', (e) => {
+      const query = e.target.value.toLowerCase();
+      const posts = document.querySelectorAll('.post-card');
+      posts.forEach(post => {
+        const title = post.querySelector('.post-title')?.innerText.toLowerCase();
+        const excerpt = post.querySelector('.post-excerpt')?.innerText.toLowerCase();
+        if (title?.includes(query) || excerpt?.includes(query)) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
