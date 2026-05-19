@@ -1,20 +1,59 @@
 ---
 layout: default
-title: My Writeups
+title: Home
 ---
 
-# Welcome to My Writeups
+<div class="post-list">
+  {% for post in paginator.posts %}
+  <article class="post-card">
+    <a href="{{ post.url | relative_url }}">
+      <div class="post-body">
+        <div>
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        </div>
+        <div class="post-meta">
+          <span><i class="far fa-calendar"></i> {{ post.date | date: "%B %d, %Y" }}</span>
+          <span class="post-cat">
+            {% for category in post.categories limit: 1 %}
+              {{ category }}
+            {% endfor %}
+          </span>
+        </div>
+      </div>
+      <div class="post-thumb">
+        <div class="thumb-placeholder">
+          <i class="{{ post.icon | default: 'fas fa-terminal' }}"></i>
+          <span>{{ post.categories | first | default: 'Writeup' }}</span>
+        </div>
+      </div>
+    </a>
+  </article>
+  {% endfor %}
+</div>
 
-This is where I share my security research, CTF writeups, and technical posts.
-
-## Latest Posts
-
-{% for post in site.posts %}
-  ### [{{ post.title }}]({{ post.url }})
-  *{{ post.date | date_to_long_string }}*
+{% if paginator.total_pages > 1 %}
+<nav class="pagination" aria-label="Page navigation">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="page-btn"><i class="fas fa-angle-left"></i></a>
+  {% else %}
+    <button class="page-btn" disabled><i class="fas fa-angle-left"></i></button>
+  {% endif %}
   
-{% endfor %}
-
----
-
-*Happy reading! 🔒*
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <button class="page-btn active">{{ page }}</button>
+    {% else %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="page-btn">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+  
+  <span style="color:var(--text-muted);font-size:0.8rem;padding:0 0.4rem;">/ {{ paginator.total_pages }}</span>
+  
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="page-btn"><i class="fas fa-angle-right"></i></a>
+  {% else %}
+    <button class="page-btn" disabled><i class="fas fa-angle-right"></i></button>
+  {% endif %}
+</nav>
+{% endif %}
