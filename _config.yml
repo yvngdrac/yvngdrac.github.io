@@ -1,62 +1,48 @@
-title: yvngdrac
-description: Security Writeups & Research
-url: "https://yvngdrac.github.io"
+title: /home/yvngdrac
+description: Security research and CTF writeups
+url: https://yvngdrac.github.io
 baseurl: ""
-github:
-  username: yvngdrac
 
-# Theme
-theme: 
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
 
-# Author
-author:
-  name: yvngdrac
-  avatar: /assets/images/avatar.jpeg
-  email: 168247678+yvngdrac@users.noreply.github.com
-  bio: "Let's learn together"
-  location: Earth
-
-# Social
-social:
-  links:
-    - https://github.com/yvngdrac
-    - https://twitter.com/yourhandle
-
-# Sidebar avatar
-avatar: /assets/images/avatar.jpeg
-
-# Comments (optional)
-comments:
-  provider: false
+# Pagination
+paginate: 10
+paginate_path: "/page/:num/"
 
 # Plugins
 plugins:
-  - jekyll-paginate
   - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-archives
   - jekyll-seo-tag
-  - jekyll-redirect-from
+  - jekyll-paginate
 
-# Pagination
-paginate: 6
-paginate_path: /page:num/
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
 
-# Archives (enable if you want category/tag/archive pages)
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layouts:
-    category: category
-    tag: tag
-
-# Prefer site dark mode
-prefer-dark-mode: true
-
+# Default front matter
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
-      layout: post
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# RSS feed
+feed:
+  path: feed.xml
+
+# Social links
+github_username: yvngdrac
