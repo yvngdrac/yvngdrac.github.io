@@ -6,7 +6,7 @@ baseurl: ""
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: pretty
+permalink: /:categories/:year/:month/:day/:title/
 
 # Pagination
 paginate: 10
@@ -18,7 +18,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
 
-# Exclude files from processing
+# Exclude files
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -39,10 +39,3 @@ defaults:
       type: "pages"
     values:
       layout: "default"
-
-# RSS feed
-feed:
-  path: feed.xml
-
-# Social links
-github_username: yvngdrac
