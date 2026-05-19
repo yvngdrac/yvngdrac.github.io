@@ -1,8 +1,62 @@
-title: yvngdrac Writeups
-description: Security research and CTF writeups
-theme: jekyll-theme-minimal
-plugins:
-  - jekyll-feed
+title: yvngdrac
+description: Security Writeups & Research
+url: "https://yvngdrac.github.io"
+baseurl: ""
+github:
+  username: yvngdrac
 
-# Simple config
-markdown: kramdown
+# Theme
+theme: jekyll-theme-chirpy
+
+# Author
+author:
+  name: yvngdrac
+  avatar: /assets/images/avatar.jpeg
+  email: 168247678+yvngdrac@users.noreply.github.com
+  bio: "Let's learn together"
+  location: Earth
+
+# Social
+social:
+  links:
+    - https://github.com/yvngdrac
+    - https://twitter.com/yourhandle
+
+# Sidebar avatar
+avatar: /assets/images/avatar.jpeg
+
+# Comments (optional)
+comments:
+  provider: false
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-archives
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+
+# Pagination
+paginate: 6
+paginate_path: /page:num/
+
+# Archives (enable if you want category/tag/archive pages)
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: category
+    tag: tag
+
+# Prefer site dark mode
+prefer-dark-mode: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
